@@ -1,12 +1,13 @@
-Introduction
+Introduction : 
 The Online Shopping Store is a distributed e-commerce web application designed using a microservices architecture. This platform enables users to browse a product catalog, manage their shopping carts, place orders, and receive confirmation emails. Admin users can manage inventory and monitor customer orders. The frontend is implemented using React, which interacts with the backend via a centralized API Gateway.
 
 The core goal of the system is to demonstrate scalability, modularity, and resilience through microservice design, RESTful APIs, Docker-based deployment, and seamless inter-service communication.
-
-Architecture
+____________________________________________________________________________________________
+Architecture : 
 Architectural Diagram
+<img width="721" height="413" alt="image" src="https://github.com/user-attachments/assets/77718697-46d9-4f5f-85d1-6e60070c1a48" />
 
-Design Decisions
+Design Decisions 
 The application is divided into the following microservices based on separation of concerns:
 
 Product Service: Catalog, inventory, and product image handling
@@ -18,8 +19,8 @@ Order Service: Coordinates order placement, inventory updates, and triggers emai
 Email Management Service: Sends order confirmation emails
 
 All services are independently deployable, supporting fault isolation and independent scaling. They run in Docker containers, orchestrated using Docker Compose.
-
-Microservices
+__________________________________________________________________________________________
+Microservices :
 Implementation Methods
 Each microservice is implemented using Spring Boot and communicates via REST over HTTP. The application uses the Netflix OSS stack, including:
 
@@ -132,8 +133,8 @@ Prepares for integration with future auth layers
 Configuration Example:
 
 CORS enabled globally for http://localhost:5173
-
-User Interface
+________________________________________________________________________________________
+User Interface: 
 Implementation Details
 The frontend is built using:
 
@@ -148,10 +149,15 @@ React Router DOM for navigation
 Key Pages:
 
 Shopping Page: Product catalog with search/filter
+<img width="730" height="368" alt="image" src="https://github.com/user-attachments/assets/c7c42e50-f75c-478d-81ff-76c9de2a3298" />
+
 
 Cart/Checkout: Item management and order placement
+<img width="780" height="307" alt="image" src="https://github.com/user-attachments/assets/69e6d2d9-67a2-42b0-942f-3bdbe8a77c28" />
 
 Admin Panel: Order tracking and product management
+<img width="733" height="378" alt="image" src="https://github.com/user-attachments/assets/7e4fb1a5-7734-4451-92d6-e417d0121ab7" />
+<img width="718" height="369" alt="image" src="https://github.com/user-attachments/assets/fc5e8e3c-1e96-48a3-b63e-7c67aaf26294" />
 
 Features:
 
@@ -171,8 +177,8 @@ Example tests:
 POST /api/products/add: Multipart data upload
 
 GET /api/products: Product listing
-
-Deployment
+_____________________________________________________________________________________________
+Deployment : 
 Local Deployment
 Steps:
 
@@ -189,8 +195,9 @@ Docker
 Docker Compose
 
 Custom bridge network for inter-service DNS resolution
-
-Production Deployment
+<img width="520" height="328" alt="image" src="https://github.com/user-attachments/assets/5409433a-ff06-44bd-b5eb-224eff6fc66c" />
+_____________________________________________________________________________________
+Deployment
 Suggested Strategy:
 
 Use Kubernetes (K8s) for production orchestration
@@ -200,28 +207,13 @@ Set up Ingress Controllers and SSL
 Use Prometheus + Grafana or ELK Stack for observability
 
 Deploy frontend via cloud hosting or container
-
+______________________________________________________________________
 Source Code
 GitHub Repository:
 🔗 https://github.com/SadeepaR/OnlineShoppingStore
 
-Directory Structure:
+Development Challenges:
 
-api_gateway/
-
-product_management/
-
-cart_management/
-
-order_management/
-
-email_management/
-
-frontend/
-
-docker-compose.yml
-
-Development Challenges
 Service Communication:
 
 Issue: Broken host references
@@ -239,7 +231,7 @@ Service Dependency Startup Order:
 Issue: Services starting out of order
 
 Solution: Used depends_on in Docker Compose
-
+_________________________________________________________________
 References
 [1] Microservices with Spring, https://spring.io/blog/2015/07/14/microservices-with-spring (accessed May 1, 2025).
 [2]GeeksforGeeks, “Java spring boot microservices - step by Step Guide,” GeeksforGeeks, https://www.geeksforgeeks.org/java-spring-boot-microservices-example-step-by-step-guide/ (accessed May 15, 2025).
