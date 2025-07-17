@@ -12,6 +12,7 @@ public class ProductManagementApplication {
 		SpringApplication.run(ProductManagementApplication.class, args);
 		// Application entry point
 		// This will start the Spring Boot application
+		// This will start the Spring Boot application
 	}
 
 }
