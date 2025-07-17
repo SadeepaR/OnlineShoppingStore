@@ -1,4 +1,4 @@
-# Dockerfile for product_management
+# Dockerfile for product_management service
 FROM openjdk:17
 WORKDIR /app
 COPY target/product_management-0.0.1-SNAPSHOT.jar app.jar
