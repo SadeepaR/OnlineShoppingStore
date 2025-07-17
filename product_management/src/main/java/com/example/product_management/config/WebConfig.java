@@ -10,6 +10,7 @@ public class WebConfig implements WebMvcConfigurer {
 
     @Value("${app.image.upload-dir}")
     private String uploadDir;
+    // This property should be set in application.properties or application.yml
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {

@@ -21,6 +21,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     @Autowired
     private JwtUtil jwtUtil;
+    // Logger can be added for better debugging
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, 
