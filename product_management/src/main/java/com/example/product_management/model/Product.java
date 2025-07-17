@@ -17,6 +17,7 @@ import lombok.NoArgsConstructor;
 @Builder
 public class Product {
     // Ensure that the Product class is properly annotated for JPA
+    
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
