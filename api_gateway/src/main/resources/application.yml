@@ -1,0 +1,74 @@
+server:
+  port: 8080      # The port your API Gateway will listen on from the host
+  address: 0.0.0.0 # Binds to all available network interfaces
+
+spring:
+  application:
+    name: api-gateway # Name of your Spring Boot application
+
+  cloud:
+    gateway:
+      server:
+        webflux:
+          globalcors:
+            corsConfigurations:
+              '[/**]': # Apply CORS to all paths
+                # IMPORTANT: When allowCredentials is true, allowedOrigins cannot be "*".
+                # Replace "http://localhost:5173" with your actual frontend application's URL.
+                allowedOrigins: "http://localhost:5173" # Example: For a Vite/React app
+                # If you have multiple frontends, list them:
+                # allowedOrigins:
+                #   - "http://localhost:5173"
+                #   - "http://your-production-frontend.com"
+                allowedMethods:
+                  - GET
+                  - POST
+                  - PUT
+                  - DELETE
+                  - OPTIONS
+                allowedHeaders:
+                  - "*"
+                allowCredentials: true # Keep this true if your frontend sends cookies/auth headers
+
+      routes:
+        - id: cart_service # Unique ID for this route
+          uri: http://cart-management:8081 # Internal Docker service name and port
+          predicates:
+            - Path=/api/cart/** # Matches requests coming to Gateway like /api/cart/items
+          filters: # Ensures the path forwarded to the backend matches what it expects
+            - RewritePath=/api/cart/(?<segment>.*), /api/cart/${segment} # Forwards /api/cart/items to http://cart-management:8081/api/cart/items
+
+        - id: product_service # Unique ID for this route
+          uri: http://product-management:8082 # Internal Docker service name and port
+          predicates:
+            - Path=/api/products/** # Matches requests coming to Gateway like /api/products/add
+          filters: # Ensures the path forwarded to the backend matches what it expects
+            - RewritePath=/api/products/(?<segment>.*), /api/products/${segment} # Forwards /api/products/add to http://product-management:8082/api/products/add
+
+        - id: order_service # Unique ID for this route
+          uri: http://order-management:8083 # Internal Docker service name and port
+          predicates:
+            - Path=/api/orders/** # Matches requests coming to Gateway like /api/orders/create
+          filters: # Ensures the path forwarded to the backend matches what it expects
+            - RewritePath=/api/orders/(?<segment>.*), /api/orders/${segment} # Forwards /api/orders/create to http://order-management:8083/api/orders/create
+
+        - id: email_service # Unique ID for the email service route
+          uri: http://email-management:8084 # Internal Docker service name and port (adjust port if different)
+          predicates:
+            - Path=/api/email/** # Matches requests coming to Gateway like /api/email/send
+          filters: # Ensures the path forwarded to the backend matches what it expects
+            - RewritePath=/api/email/(?<segment>.*), /api/email/${segment} # Forwards /api/email/send to http://email-management:8084/api/email/send
+
+management: # Actuator configuration for health checks
+  endpoints:
+    web:
+      exposure:
+        include: health,info # Exposes /actuator/health and /actuator/info endpoints
+
+logging:
+  level:
+    root: INFO
+    org.springframework.cloud.gateway: DEBUG
+    reactor.netty: DEBUG
+    org.springframework.web.cors: DEBUG
+    # com.example.api_gateway: DEBUG # Uncomment if you have custom controllers/code in your API Gateway
