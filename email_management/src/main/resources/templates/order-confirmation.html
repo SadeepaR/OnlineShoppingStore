@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Confirmation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .header {
+            background-color: #007bff;
+            color: #ffffff;
+            padding: 10px 0;
+            text-align: center;
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
+        }
+        .content {
+            padding: 20px;
+            line-height: 1.6;
+            color: #333;
+        }
+        .footer {
+            text-align: center;
+            padding: 20px;
+            font-size: 12px;
+            color: #777;
+            border-top: 1px solid #eee;
+            margin-top: 20px;
+        }
+        .order-details table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+        .order-details th, .order-details td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        .order-details th {
+            background-color: #f2f2f2;
+        }
+        .total {
+            font-weight: bold;
+            text-align: right;
+            padding-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h2>Order Confirmation - <span th:text="${orderId}">#ORDER123</span></h2>
+        </div>
+        <div class="content">
+            <p>Dear Valued Customer,</p>
+            <p>Thank you for your recent order! We're excited to confirm that your order with ID <strong><span th:text="${orderId}">#ORDER123</span></strong> has been successfully placed.</p>
+
+            <h3>Order Summary:</h3>
+            <div class="order-details">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Product</th>
+                            <th>Quantity</th>
+                            <th>Price Per Unit (Rs.)</th>
+                            <th>Subtotal (Rs.)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="item : ${orderItems}">
+                            <td th:text="${item.productName}">Product Name</td>
+                            <td th:text="${item.quantity}">1</td>
+                            <td th:text="${#numbers.formatCurrency(item.pricePerUnit)}">Rs.100.00</td>
+                            <td th:text="${#numbers.formatCurrency(item.quantity * item.pricePerUnit)}">Rs.100.00</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p class="total">Total: <span th:text="${#numbers.formatCurrency(totalPrice)}">Rs.100.00</span></p>
+
+            <h3>Shipping Details:</h3>
+            <p><strong>Shipping Address:</strong> <span th:text="${shippingAddress}">123 Main St, Anytown</span></p>
+            <p><strong>Recipient Email:</strong> <span th:text="${userEmail}">customer@example.com</span></p>
+
+            <p>Your order will be processed and shipped shortly. You will receive another email with tracking information once your order has been dispatched.</p>
+            <p>If you have any questions, please don't hesitate to contact our customer support team.</p>
+            <p>Sincerely,</p>
+            <p>The ShopME Team</p>
+        </div>
+        <div class="footer">
+            <p>&copy; 2025 ShopME. All rights reserved.</p>
+        </div>
+    </div>
+</body>
+</html>
