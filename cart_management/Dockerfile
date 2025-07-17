@@ -1,4 +1,4 @@
-# Dockerfile for cart_management
+# Dockerfile for cart_management microservice
 FROM openjdk:17
 WORKDIR /app
 COPY target/cart_management-0.0.1-SNAPSHOT.jar app.jar
