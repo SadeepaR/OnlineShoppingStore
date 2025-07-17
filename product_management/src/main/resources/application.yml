@@ -1,0 +1,27 @@
+# product-management/src/main/resources/application.yml
+
+server:
+  port: 8082
+  address: 0.0.0.0
+
+spring:
+  application:
+    name: product-management
+  # No database configuration needed in application.yml for image storage itself
+  # ... (other spring config if any, but ensure no JPA/datasource for image-only)
+
+# --- ADD THESE NEW PROPERTIES ---
+app:
+  image:
+    # This path is *inside* the Docker container.
+    # It must be an absolute path that exists or can be created within the container.
+    upload-dir: /tmp/uploads/images/ # /tmp is a common place for temporary files in Linux
+    # The base URL from which these images will be accessed.
+    # If accessed directly, it's the product-management service's external URL.
+    base-url: http://localhost:8082/images/
+
+logging:
+  level:
+    root: INFO
+    org.springframework.web: DEBUG
+    com.example.product_management: DEBUG # Adjust this to your base package for more specific logging
