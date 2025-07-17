@@ -51,6 +51,8 @@ public class ProductController {
         File dir = new File(uploadDir);
         if (!dir.exists()){
             dir.mkdirs();
+            // Ensure the directory exists before saving the file
+            // This is crucial for avoiding FileNotFoundException
         }
         String filename = UUID.randomUUID() + "_" + imageFile.getOriginalFilename();
         File dest = new File(uploadDir + filename);
