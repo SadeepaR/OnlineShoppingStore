@@ -1,18 +1,17 @@
 server:
-  port: 8080      # The port your API Gateway will listen on from the host
+  port: 8080 # The port your API Gateway will listen on from the host
   address: 0.0.0.0 # Binds to all available network interfaces
 
 spring:
   application:
     name: api-gateway # Name of your Spring Boot application
-
   cloud:
     gateway:
       server:
         webflux:
           globalcors:
             corsConfigurations:
-              '[/**]': # Apply CORS to all paths
+              "[/**]": # Apply CORS to all paths
                 # IMPORTANT: When allowCredentials is true, allowedOrigins cannot be "*".
                 # Replace "http://localhost:5173" with your actual frontend application's URL.
                 allowedOrigins: "http://localhost:5173" # Example: For a Vite/React app
