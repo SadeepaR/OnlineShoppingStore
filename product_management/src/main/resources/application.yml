@@ -11,6 +11,7 @@ spring:
   # ... (other spring config if any, but ensure no JPA/datasource for image-only)
 
 # --- ADD THESE NEW PROPERTIES ---
+# Configuration for image upload and access
 app:
   image:
     # This path is *inside* the Docker container.
